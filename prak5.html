@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Dataset</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(45deg, #0e0725, #4f4ed7, #f55a9b, #68e3f9);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: fit-content;
+            max-width: 100%;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .navbar-title {
+            color: #315cfd;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .navbar-search {
+            padding: 8px;
+            border: 2px solid #315cfd;
+            border-radius: 5px;
+        }
+
+        h1 {
+            color: #fff;
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 5px; /* Mengurangi jarak atas label */
+            color: #fff;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select,
+        button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 5px; /* Mengurangi jarak atas input */
+            margin-bottom: 5px; /* Mengurangi jarak bawah input */
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            color: #fff;
+            transition: background 0.3s, color 0.3s;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus,
+        select:focus,
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            color: #333;
+        }
+
+        button {
+            width: 150px;
+            height: 60px;
+            border: 3px solid #315cfd;
+            border-radius: 45px;
+            transition: all 0.3s;
+            cursor: pointer;
+            background: white;
+            font-size: 1.2em;
+            font-weight: 550;
+            font-family: 'Montserrat', sans-serif;
+            color: #315cfd;
+        }
+
+        button:hover {
+            background: #315cfd;
+            color: white;
+            font-size: 1.5em;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+                flex-direction: column;
+            }
+
+            .container {
+                width: 100%;
+                margin: 0;
+                box-shadow: none;
+            }
+        }
+
+        #datasetTable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #datasetTable th,
+        #datasetTable td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #datasetTable th {
+            background-color: #315cfd;
+            color: #fff;
+        }
+
+        #datasetTable tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #datasetTable tbody tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar-title">Data Dataset</div>
+            <input type="text" id="searchDataset" class="navbar-search" onkeyup="searchDataset()" placeholder="Cari dataset...">
+        </div>
+
+        <!-- Form Input Data Dataset -->
+        <form id="datasetForm">
+            <label for="datasetName">Nama Dataset:</label>
+            <input type="text" id="datasetName" name="datasetName" required><br><br>
+            <label for="creator">Pembuat Dataset:</label>
+            <input type="text" id="creator" name="creator" required><br><br>
+            <label for="verifier">Verifikator Dataset:</label>
+            <input type="text" id="verifier" name="verifier" required><br><br>
+            <label for="recordCount">Jumlah Records:</label>
+            <input type="number" id="recordCount" name="recordCount" required><br><br>
+            <label for="attributeCount">Jumlah Attribute Data:</label>
+            <input type="number" id="attributeCount" name="attributeCount" required><br><br>
+            <label for="dataSource">Deskripsi Sumber Data:</label>
+            <textarea id="dataSource" name="dataSource" required></textarea><br><br>
+            <label for="startDate">Tanggal Mulai:</label>
+            <input type="date" id="startDate" name="startDate" required><br><br>
+            <label for="endDate">Tanggal Selesai:</label>
+            <input type="date" id="endDate" name="endDate" required><br><br>
+            <label for="status">Status Penyelesaian:</label>
+            <select id="status" name="status" required>
+                <option value="Selesai">Selesai</option>
+                <option value="Berlangsung">Berlangsung</option>
+                <option value="Gagal">Gagal</option>
+            </select><br><br>
+            <label for="notes">Catatan Akhir Kegiatan:</label>
+            <textarea id="notes" name="notes"></textarea><br><br>
+			<input type="submit" value="Simpan">
+			</form>
+			
+			    <!-- Tabel yang Menyimpan Data -->
+    <table id="datasetTable">
+        <thead>
+            <tr>
+                <th>Nama Dataset</th>
+                <th>Pembuat Dataset</th>
+                <th>Verifikator Dataset</th>
+                <th>Jumlah Records</th>
+                <th>Jumlah Attribute Data</th>
+                <th>Deskripsi Sumber Data</th>
+                <th>Tanggal Mulai</th>
+                <th>Tanggal Selesai</th>
+                <th>Status Penyelesaian</th>
+                <th>Catatan Akhir</th>
+                <th>Waktu Perekaman</th>
+                <th>Waktu Update Terakhir</th>
+            </tr>
+        </thead>
+        <tbody id="datasetTableBody">
+            <!-- Data dataset akan ditampilkan di sini -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('datasetForm');
+        const datasetTableBody = document.getElementById('datasetTableBody');
+        const searchDatasetInput = document.getElementById('searchDataset');
+
+        // Menangani submit form dataset
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Validasi form sebelum mengirimkan data
+            const validationResult = validateForm();
+            if (validationResult.isValid) {
+                const formData = new FormData(form);
+                const data = {};
+                
+                for (let [key, value] of formData.entries()) {
+                    data[key] = value;
+                }
+
+                const existingDatasetIndex = findDatasetIndex(data.datasetName, data.creator);
+                if (existingDatasetIndex !== -1) {
+                    // Jika dataset dengan nama dan pembuat yang sama sudah ada, update data tersebut
+                    updateDataset(existingDatasetIndex, data);
+                } else {
+                    // Jika dataset belum ada, tambahkan data baru ke dalam tabel
+                    addDatasetToTable(data);
+                }
+                
+                // Reset form setelah disubmit
+                form.reset();
+            } else {
+                // Tampilkan pesan keterangan di bawah kolom input yang tidak terisi
+                for (let fieldName of validationResult.emptyFields) {
+                    const fieldInput = document.getElementById(fieldName);
+                    fieldInput.style.backgroundColor = 'rgba(255, 0, 0, 0.2)';
+                    const errorMessage = document.createElement('span');
+                    errorMessage.textContent = 'Field ini wajib diisi.';
+                    errorMessage.style.color = 'red';
+                    errorMessage.className = 'error-message';
+                    if (!fieldInput.parentNode.querySelector('.error-message')) {
+                        fieldInput.parentNode.appendChild(errorMessage);
+                    }
+                }
+            }
+        });
+
+        // Fungsi untuk menemukan indeks dataset dengan nama dan pembuat yang sama
+        function findDatasetIndex(datasetName, creator) {
+            const rows = datasetTableBody.getElementsByTagName('tr');
+            for (let i = 0; i < rows.length; i++) {
+                const nameColumn = rows[i].getElementsByTagName('td')[0];
+                const creatorColumn = rows[i].getElementsByTagName('td')[1];
+                if (nameColumn && creatorColumn) {
+                    const nameText = nameColumn.textContent || nameColumn.innerText;
+                    const creatorText = creatorColumn.textContent || creatorColumn.innerText;
+                    if (nameText === datasetName && creatorText === creator) {
+                        return i;
+                    }
+                }
+            }
+            return -1;
+        }
+
+        // Fungsi untuk mengupdate dataset yang sudah ada
+        function updateDataset(index, newData) {
+            const row = datasetTableBody.getElementsByTagName('tr')[index];
+            const recordedTime = row.cells[10].textContent;
+            row.innerHTML = `
+                <td>${newData.datasetName}</td>
+                <td>${newData.creator}</td>
+                <td>${newData.verifier}</td>
+                <td>${newData.recordCount}</td>
+                <td>${newData.attributeCount}</td>
+                <td>${newData.dataSource}</td>
+                <td>${newData.startDate}</td>
+                <td>${newData.endDate}</td>
+                <td>${newData.status}</td>
+                <td>${newData.notes}</td>
+                <td>${recordedTime}</td>
+                <td>${new Date().toLocaleString()}</td>
+            `;
+        }
+
+        // Fungsi untuk menambahkan data dataset ke dalam tabel
+        function addDatasetToTable(dataset) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${dataset.datasetName}</td>
+                <td>${dataset.creator}</td>
+                <td>${dataset.verifier}</td>
+                <td>${dataset.recordCount}</td>
+                <td>${dataset.attributeCount}</td>
+                <td>${dataset.dataSource}</td>
+                <td>${dataset.startDate}</td>
+                <td>${dataset.endDate}</td>
+                <td>${dataset.status}</td>
+                <td>${dataset.notes}</td>
+                <td>${new Date().toLocaleString()}</td>
+                <td>${new Date().toLocaleString()}</td>
+            `;
+            datasetTableBody.appendChild(row);
+        }
+
+        // Fungsi untuk melakukan validasi form sebelum submit
+        function validateForm() {
+    const datasetName = document.getElementById('datasetName').value.trim();
+    const creator = document.getElementById('creator').value.trim();
+    const verifier = document.getElementById('verifier').value.trim();
+    const recordCount = document.getElementById('recordCount').value.trim();
+    const attributeCount = document.getElementById('attributeCount').value.trim();
+    const dataSource = document.getElementById('dataSource').value.trim();
+    const startDate = document.getElementById('startDate').value.trim();
+    const endDate = document.getElementById('endDate').value.trim();
+    const status = document.getElementById('status').value.trim();
+    
+    const emptyFields = [];
+    
+    // Validasi input kosong
+    if (datasetName === '') {
+        emptyFields.push('datasetName');
+    }
+    if (creator === '') {
+        emptyFields.push('creator');
+    }
+    if (verifier === '') {
+        emptyFields.push('verifier');
+    }
+    if (recordCount === '') {
+        emptyFields.push('recordCount');
+    }
+    if (attributeCount === '') {
+        emptyFields.push('attributeCount');
+    }
+    if (dataSource === '') {
+        emptyFields.push('dataSource');
+    }
+    if (startDate === '') {
+        emptyFields.push('startDate');
+    }
+    if (endDate === '') {
+        emptyFields.push('endDate');
+    }
+    if (status === '') {
+        emptyFields.push('status');
+    }
+    
+    // Validasi tanggal mulai lebih awal daripada tanggal selesai
+    if (startDate !== '' && endDate !== '' && new Date(startDate) > new Date(endDate)) {
+        alert('Tanggal mulai harus lebih awal daripada tanggal selesai.');
+        return { isValid: false, emptyFields };
+    }
+    
+    return { isValid: emptyFields.length === 0, emptyFields };
+}
+

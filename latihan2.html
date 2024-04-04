@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Dataset</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar-title">Data Dataset</div>
+            <input type="text" id="searchDataset" class="navbar-search" onkeyup="searchDataset()" placeholder="Cari dataset...">
+        </div>
+
+        <!-- Form Input Data Dataset -->
+        <form id="datasetForm">
+            <label for="datasetName">Nama Dataset:</label>
+            <input type="text" id="datasetName" name="datasetName" required><br><br>
+            <label for="creator">Pembuat Dataset:</label>
+            <input type="text" id="creator" name="creator" required><br><br>
+            <label for="verifier">Verifikator Dataset:</label>
+            <input type="text" id="verifier" name="verifier" required><br><br>
+            <label for="recordCount">Jumlah Records:</label>
+            <input type="number" id="recordCount" name="recordCount" required><br><br>
+            <label for="attributeCount">Jumlah Attribute Data:</label>
+            <input type="number" id="attributeCount" name="attributeCount" required><br><br>
+            <label for="dataSource">Deskripsi Sumber Data:</label>
+            <textarea id="dataSource" name="dataSource" required></textarea><br><br>
+            <label for="startDate">Tanggal Mulai:</label>
+            <input type="date" id="startDate" name="startDate" required><br><br>
+            <label for="endDate">Tanggal Selesai:</label>
+            <input type="date" id="endDate" name="endDate" required><br><br>
+            <label for="status">Status Penyelesaian:</label>
+            <select id="status" name="status" required>
+                <option value="Selesai">Selesai</option>
+                <option value="Berlangsung">Berlangsung</option>
+                <option value="Gagal">Gagal</option>
+            </select><br><br>
+            <label for="notes">Catatan Akhir Kegiatan:</label>
+            <textarea id="notes" name="notes"></textarea><br><br>
+            <input type="submit" value="Simpan">
+        </form>
+        
+        <!-- Tabel yang Menyimpan Data -->
+        <table id="datasetTable">
+            <thead>
+                <tr>
+                    <th>Nama Dataset</th>
+                    <th>Pembuat Dataset</th>
+                    <th>Verifikator Dataset</th>
+                    <th>Jumlah Records</th>
+                    <th>Jumlah Attribute Data</th>
+                    <th>Deskripsi Sumber Data</th>
+                    <th>Tanggal Mulai</th>
+                    <th>Tanggal Selesai</th>
+                    <th>Status Penyelesaian</th>
+                    <th>Catatan Akhir</th>
+                    <th>Waktu Perekaman</th>
+                    <th>Waktu Update Terakhir</th>
+                </tr>
+            </thead>
+            <tbody id="datasetTableBody">
+                <!-- Data dataset akan ditampilkan di sini -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,155 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(45deg, #0e0725, #4f4ed7, #f55a9b, #68e3f9);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: fit-content;
+    max-width: 100%;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.navbar-title {
+    color: #315cfd;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.navbar-search {
+    padding: 8px;
+    border: 2px solid #315cfd;
+    border-radius: 5px;
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 5px; /* Mengurangi jarak atas label */
+    color: #fff;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select,
+button {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px; /* Mengurangi jarak atas input */
+    margin-bottom: 5px; /* Mengurangi jarak bawah input */
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    color: #fff;
+    transition: background 0.3s, color 0.3s;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus,
+button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: #333;
+}
+
+button {
+    width: 150px;
+    height: 60px;
+    border: 3px solid #315cfd;
+    border-radius: 45px;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: white;
+    font-size: 1.2em;
+    font-weight: 550;
+    font-family: 'Montserrat', sans-serif;
+    color: #315cfd;
+}
+
+button:hover {
+    background: #315cfd;
+    color: white;
+    font-size: 1.5em;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+        flex-direction: column;
+    }
+
+    .container {
+        width: 100%;
+        margin: 0;
+        box-shadow: none;
+    }
+}
+
+#datasetTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#datasetTable th,
+#datasetTable td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#datasetTable th {
+    background-color: #315cfd;
+    color: #fff;
+}
+
+#datasetTable tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#datasetTable tbody tr:hover {
+    background-color: #ddd;
+}
